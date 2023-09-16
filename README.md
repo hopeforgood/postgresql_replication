@@ -54,6 +54,7 @@ user: root / password: password
       PUBLICATION prod_orders;   
 ## 7. Compile and execute insert procedure:
   Compile the procure (run script procedure_prc_inserts.sql) in pg_master and call it:
+  
   CALL public.prc_inserts();
 
   This procedure is set to perform 100000 record inserts into cloudwalk.orders table.
@@ -81,12 +82,16 @@ CREATE TABLE IF NOT EXISTS cloudwalk.orders2(
 --Create some partitions (child tables)
 CREATE TABLE cloudwalk.orders2_20230916 PARTITION OF cloudwalk.orders2 
      FOR VALUES FROM (now()) TO (now() + interval '1 day');
+     
 CREATE TABLE cloudwalk.orders2_20230917 PARTITION OF cloudwalk.orders2 
      FOR VALUES FROM (now() + interval '1 day') TO (now() + interval '2 day');
+     
 CREATE TABLE cloudwalk.orders2_20230917 PARTITION OF cloudwalk.orders2 
      FOR VALUES FROM (now() + interval '2 day') TO (now() + interval '3 day');
+     
 CREATE TABLE cloudwalk.orders2_20230917 PARTITION OF cloudwalk.orders2 
      FOR VALUES FROM (now() + interval '3 day') TO (now() + interval '4 day');
+     
 CREATE TABLE cloudwalk.orders2_20230917 PARTITION OF cloudwalk.orders2 
      FOR VALUES FROM (now() + interval '4 day') TO (now() + interval '5 day');
 
@@ -117,6 +122,7 @@ select * from cloudwalk.orders;  --Not Partitioned
 1-) Create a view pointing to original table:
    create or replace view cloudwalk.orders_vw as
    select * from cloudwalk.orders;
+   
 1.1-) All applications that just needs to read data will have to read data from pg_master using this view instead of querying directly the real table.
 
 1.2-) Now modify the view so it reads data from partitioned table:
