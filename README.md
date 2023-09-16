@@ -130,6 +130,12 @@ Views also should allow DMLS oprations.
 
 
 --Ultimately if you need to use original table name for all applications you can rename the table names
+
+--First check what is the latest value for ID column and then make the new sequece (for partitioned table start from that value plus 1000)
+select max(id) + 1000 from cloudwalk.orders;
+--Suppose above query returns 1560
+--Use this value in bellows alter statement:
+ALTER SEQUENCE cloudwalk.orders2_id_seq RESTART 1560;
 --Deprecate table that is not partitioned
 alter table cloudwalk.orders rename to orders_old;
 --Make new partitioned table the official one:
