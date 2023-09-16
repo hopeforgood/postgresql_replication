@@ -129,8 +129,8 @@ select * from cloudwalk.orders;  --Not Partitioned
    create or replace view cloudwalk.orders_vw as
    select * from cloudwalk.orders2;
    
-Now we have applications reading data form new partitined table.
-Views also should allow DMLS oprations.
+Now we have applications reading data from new partitined table using this view.
+Views compile time is very fast and also should allow DML operations.
 
 --Ultimately if you need to use original table name for all applications you can rename the table names
 
