@@ -54,7 +54,7 @@ user: root / password: password
       PUBLICATION prod_orders;   
 ## 7. Compile and execute insert procedure:
   Compile the procure (run script procedure_prc_inserts.sql) in pg_master and call it:
-  CALL public.fnc_inserts();
+  CALL public.prc_inserts();
 
   This procedure is set to perform 100000 record inserts into cloudwalk.orders table.
   And the loop waits 0.2 seconds between each insert so we can simulate real world inserts into our database.
