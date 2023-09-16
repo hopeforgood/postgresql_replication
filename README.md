@@ -21,6 +21,17 @@ Database pg_master acts as Publisher and pg_replica as Subscriber.
     postgresql_replication-pg_master-1
     postgresql_replication-pg_replica-1
 
+## 4. Configure your DBeaver/other tool to properly query testdb and testdbreplica
+For pg_master:
+host: localhost port: 5432 
+database: testdb
+user: root / password: password
+
+For pg_replica:
+host: localhost port: 5433
+database: testdbreplica
+user: root / password: password
+
 ## 5. Verify what is the IP address set for pg_master-1:
    docker network inspect postgresql_replication_default
 
