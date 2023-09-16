@@ -11,7 +11,7 @@ Database pg_master acts as Publisher and pg_replica as Subscriber.
    https://www.docker.com/products/docker-desktop/
    
 ## 3. Execute the docker compose file
-   In your computer's terminal navigate to the repo root folder "postgresql_replication":
+   In your computer's terminal navigate to the repo root folder "postgresql_replication" and execute:
    docker-compose up -d
 
 ## 4. Check that you now have e docker containers running:
@@ -40,8 +40,16 @@ Database pg_master acts as Publisher and pg_replica as Subscriber.
       			password = password
       			port = 5432'
       PUBLICATION prod_orders;   
-   
-## 7. Make sure you have installed Docker
+## 7. Compile and execute insert procedure:
+  Compile the procure prc_inserts in pg_master and call it:
+  procedure_prc_inserts.sql
+  CALL public.fnc_inserts();
+
+  This procedure is set to perform 100000 record inserts into cloudwalk.orders table.
+  And the loop waits 0.2 seconds between each insert so we can simulate real world inserts into our database.
+
+  Check on pg_master and pg_replica how many how we have in cloudwalk.orders table.
+  Verify that while the procure runs the replication is working good.
 
 
 ## 2. Make sure you have installed Docker
