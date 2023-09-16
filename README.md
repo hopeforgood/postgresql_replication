@@ -126,9 +126,6 @@ select * from cloudwalk.orders;  --Not Partitioned
 Now we have applications reading data form new partitined table.
 Views also should allow DMLS oprations.
 
-
-
-
 --Ultimately if you need to use original table name for all applications you can rename the table names
 
 --First check what is the latest value for ID column and then make the new sequece (for partitioned table start from that value plus 1000)
