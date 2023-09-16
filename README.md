@@ -82,17 +82,17 @@ CREATE TABLE IF NOT EXISTS cloudwalk.orders2(
 --Create some partitions (child tables)
 CREATE TABLE cloudwalk.orders2_20230916 PARTITION OF cloudwalk.orders2 
      FOR VALUES FROM (now()) TO (now() + interval '1 day');
-     
+
 CREATE TABLE cloudwalk.orders2_20230917 PARTITION OF cloudwalk.orders2 
      FOR VALUES FROM (now() + interval '1 day') TO (now() + interval '2 day');
-     
-CREATE TABLE cloudwalk.orders2_20230917 PARTITION OF cloudwalk.orders2 
+
+CREATE TABLE cloudwalk.orders2_20230918 PARTITION OF cloudwalk.orders2 
      FOR VALUES FROM (now() + interval '2 day') TO (now() + interval '3 day');
-     
-CREATE TABLE cloudwalk.orders2_20230917 PARTITION OF cloudwalk.orders2 
+
+CREATE TABLE cloudwalk.orders2_20230919 PARTITION OF cloudwalk.orders2 
      FOR VALUES FROM (now() + interval '3 day') TO (now() + interval '4 day');
-     
-CREATE TABLE cloudwalk.orders2_20230917 PARTITION OF cloudwalk.orders2 
+
+CREATE TABLE cloudwalk.orders2_20230920 PARTITION OF cloudwalk.orders2 
      FOR VALUES FROM (now() + interval '4 day') TO (now() + interval '5 day');
 
 --Notice the partitioned table we created the identity column as DEFAULT instead of ALWAYS
