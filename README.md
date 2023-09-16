@@ -121,7 +121,7 @@ select * from cloudwalk.orders2; --Partitioned
 
 select * from cloudwalk.orders;  --Not Partitioned
 
-## 10. To make the cloudwalk.orders as a partitioned table with no downtime we have to:
+## 9. To make the cloudwalk.orders as a partitioned table with no downtime we have to:
 1-) Create a view pointing to original table:
    create or replace view cloudwalk.orders_vw as
    select * from cloudwalk.orders;
