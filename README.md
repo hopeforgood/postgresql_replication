@@ -15,7 +15,7 @@ Database pg_master acts as Publisher and pg_replica as Subscriber.
 
 ## 4. Check that you now have e docker containers running:
    {code}
-   docker ps
+   docker ps 
    {code}
 
    You should see:
