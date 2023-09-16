@@ -11,6 +11,7 @@ Database pg_master acts as Publisher and pg_replica as Subscriber.
    https://www.docker.com/products/docker-desktop/
    
 ## 3. Execute the docker compose file
+   In your computer's terminal navigate to the repo root folder "postgresql_replication":
    docker-compose up -d
 
 ## 4. Check that you now have e docker containers running:
