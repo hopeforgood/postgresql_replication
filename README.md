@@ -51,6 +51,25 @@ Database pg_master acts as Publisher and pg_replica as Subscriber.
   Check on pg_master and pg_replica how many how we have in cloudwalk.orders table.
   Verify that while the procure runs the replication is working good.
 
+  --To check total rows
+  select count(*) from cloudwalk.orders; 
 
-## 2. Make sure you have installed Docker
+  --To quickly check latest rows added
+  select * from cloudwalk.orders order by 1 desc;
+
+
+## 8. To make the cloudwalk.orders as a partitioned table with no downtime we have to:
+1-) Create a view pointing to original table:
+   create or replace view cloudwalk.orders_vw as
+   select * from cloudwalk.orders;
+1.1-) All applications that just needs to read data will have to read data from pg_master using this view instead of querying directly the real table.
+
+1.2-) Now lets create a second table similar to cloudwalk.orders but partitioned:
+CREATE TABLE IF NOT EXISTS cloudwalk.orders2(
+    id              integer GENERATED ALWAYS AS IDENTITY primary key,
+    product_name    text,
+    quantity        integer,
+    order_date      date);
+) PARTITION BY RANGE (order_date);
+   
    
