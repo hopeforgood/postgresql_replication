@@ -135,19 +135,30 @@ Views compile time is very fast and also should allow DML operations.
 --Ultimately if you need to use original table name for all applications you can rename the table names
 
 --First check what is the latest value for ID column and then make the new sequece (for partitioned table start from that value plus 1000)
+
 select max(id) + 1000 from cloudwalk.orders;
+
 --Suppose above query returns 1560
+
 --Use this value in bellows alter statement:
+
 ALTER SEQUENCE cloudwalk.orders2_id_seq RESTART 1560;
+
 --Deprecate table that is not partitioned
+
 alter table cloudwalk.orders rename to orders_old;
+
 --Make new partitioned table the official one:
+
 alter table cloudwalk.orders2 rename to orders;
+
 --Do not forget to also recompile the view to point to new partitioned table.
+
 create or replace view cloudwalk.orders_vw as
 select * from cloudwalk.orders order by 1 desc;
 
 --But this opration caused bellow error in inserting procedure:
+
 SQL Error [42P01]: ERROR: relation "cloudwalk.orders" does not exist
   Where: PL/pgSQL function prc_inserts() line 9 at SQL statement
 
