@@ -1,20 +1,16 @@
-# Database Reliability Engineer Test
+# Database Reliability Engineer challenge
 
 ## 1. Introduction
 
-This test is intended for candidates applying to Database Reliablity Engineering positions at CloudWalk.
+Docker Composer to setup 2 PostgreSql databases and enable data replication
+Database Master acts as Publisher and Replica as Subscriber.
 
-You are welcome to use any programming language that you are comfortable with.
-
-## 2. Tasks
-
+## 2.
 ### 2.1. Docker Compose Setup
-
-Write a docker-compose.yml file to set up two PostgreSQL instances named pg_master and pg_replica.
+The docker-compose.yml file sets up two PostgreSQL instances named pg_master and pg_replica.
 
 ### 2.2. Database Creation and Schema Setup
-
-Create a PostgreSQL database called testDB inside the pg_master. Inside testDB, create a table called orders with the following columns:
+PostgreSQL database instance pg_master has testDB database. In testDB we have a table called orders with the following columns:
 - id: Integer, primary key, auto-increment
 - product_name: Text
 - quantity: Integer
