@@ -99,23 +99,26 @@ CREATE TABLE cloudwalk.orders2_20230920 PARTITION OF cloudwalk.orders2
 --This allow the trigger to insert the id from the source table.
 
 ## 8.1 Create a trigger that will send all data the original table receives to the new partitioned table:
+
 CREATE FUNCTION fnc_migrate_orders() RETURNS trigger AS $$
     BEGIN
-		insert into cloudwalk.orders2
-		select * from cloudwalk.orders a
-		 where not exists (select 1
-		                     from cloudwalk.orders2 b
-		                    where a.id = b.id
-		                      and a.order_date = b.order_date);
-        RETURN NEW;
+    	insert into cloudwalk.orders2
+     	select * from cloudwalk.orders a
+	 where not exists (select 1
+			     from cloudwalk.orders2 b
+			    where a.id = b.id
+			      and a.order_date = b.order_date);
+RETURN NEW;
     END;
 $$ LANGUAGE plpgsql;
+
 
 CREATE TRIGGER trg_migrate_orders BEFORE INSERT ON cloudwalk.orders
     FOR EACH STATEMENT EXECUTE FUNCTION fnc_migrate_orders();
 
 ## 8.2 Right after the trigger creation check the new partitoned table now has the same data as the original table
 select * from cloudwalk.orders2; --Partitioned
+
 select * from cloudwalk.orders;  --Not Partitioned
 
 ## 10. To make the cloudwalk.orders as a partitioned table with no downtime we have to:
